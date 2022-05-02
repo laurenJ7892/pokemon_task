@@ -1,0 +1,48 @@
+{
+  "name": "pokemon",
+  "version": "1.0.0",
+  "description": "Pokemon full stack - add to the party",
+  "main": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laurenJ7892/pokemon_task"
+  },
+  "author": "Lauren Jarrett",
+  "scripts": {
+    "build": "npx webpack --config dev.config.js",
+    "start": "npx webpack serve --config dev.config.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@popperjs/core": "^2.9.2",
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "dotenv-webpack": "^7.1.0",
+    "express": "^4.17.1",
+    "firebase": "^9.6.11",
+    "mini-css-extract-plugin": "^1.6.2",
+    "node-path": "^0.0.3",
+    "popper.js": "^1.16.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^7.0.4",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  }
+}
