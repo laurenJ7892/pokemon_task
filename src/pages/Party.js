@@ -8,7 +8,6 @@ import { removePokemon } from '../logic/party'
 const Party = (props) => {
   
   const removePokeFromPaty = async (pokemon) => {
-    console.log(pokemon);
     await removePokemon(pokemon);
     props.getParty();
   }

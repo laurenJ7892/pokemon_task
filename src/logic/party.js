@@ -1,5 +1,7 @@
 import { addPokeToParty, removePokeFromPaty, getParty, getPartyCounter } from '../../firebase/firebase';
 
+export const partySize = 6;
+
 export const getPartyData = async () => {
     let partyData = await getParty();
     return partyData
@@ -11,8 +13,13 @@ export const removePokemon = async (pokemon) => {
   return done;
 }
 
+export const checkPartySize = (party) => {
+  const data = party.filter(item => item.name != '');
+  console.log(data);
+  return data;
+}
+
 export const addPokemon = async (pokemon) => {
-  console.log(pokemon);
   const done = await addPokeToParty(pokemon);
   // send back to trigger getPaty Load
   return done;

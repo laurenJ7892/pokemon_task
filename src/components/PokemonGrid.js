@@ -10,7 +10,7 @@ const PokemonGrid = (props) => {
 
   return (
     <div className="pokemon--grid">
-        {props.state && props.state.map((item, index) => <PokemonSquare key={index} count={filterCount(item.name)} data={item} page={'pokedex'} addMethod={(pokemon) => props.addMethod(pokemon)} /> )}
+        {props.state && props.state.map((item, index) => <PokemonSquare party={props.party} key={index} count={filterCount(item.name)} data={item} page={'pokedex'} addMethod={(pokemon) => props.addMethod(pokemon)} /> )}
     </div>
   )
 };

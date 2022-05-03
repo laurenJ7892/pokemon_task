@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import { ToastContainer, toast } from 'react-toastify';
 import PokemonGrid from '../components/PokemonGrid';
 import PartyColumn from '../components/PartyColumn';
 import scrollMore from '../../images/scroll_more.png';
 import { getLoadMorePokies } from '../../api/api';
-import { addPokemon } from '../logic/party';
+import { addPokemon, partySize, checkPartySize } from '../logic/party';
 
 const Pokedex = (props) => {
-  const [loadMore, setLoadMore] = useState(true);
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=12');
   const [pokemonData, setPokemonData] = useState([]);
 
@@ -22,24 +21,27 @@ const Pokedex = (props) => {
     // check if page scroll is within 10 of the window height
     if (scrollTop + window.innerHeight + 10 >= scrollHeight)
     {
-      setLoadMore(true);
+      getData();
     }
   };
   
-  const getData = async (loadMore) => {
-    if (loadMore) {
-      let newResults = await getLoadMorePokies(url);
-      if (newResults && newResults.data && newResults.data.length > 0) {
-        setPokemonData([...pokemonData, ...newResults.data]);
-        setUrl(newResults.nextUrl);
-        setLoadMore(false);
-      }
+  const getData = async () => {
+    let newResults = await getLoadMorePokies(url);
+    if (newResults && newResults.data && newResults.data.length > 0) {
+      setPokemonData([...pokemonData, ...newResults.data]);
+      setUrl(newResults.nextUrl);
     }
   }
 
   const addPoke = async (pokemon) => {
-    await addPokemon(pokemon);
-    props.getParty();
+    let data = await checkPartySize(props.state);
+    if (data.length < partySize) {
+      await addPokemon(pokemon);
+      props.getParty();
+    } else {
+      // to test
+      toast("You already have 6 pokemon, please remove before adding more!");
+    }
   }
 
   useEffect(() => {
@@ -47,10 +49,11 @@ const Pokedex = (props) => {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
-  useEffect(() => { getData(loadMore);});
+  useEffect(() => { getData();}, []);
 
   return (
     <div className="content-container">
+        <ToastContainer  position="top-right" autoClose={5000} closeOnClick/>
         <p className="pokegrid_tally">{pokemonData.length}/151</p>
         <Link to="/party">
         <div className="circle">
@@ -68,7 +71,7 @@ const Pokedex = (props) => {
           </div>
         </div>
         <div className="pokegrid--col--2">
-          <PokemonGrid state={pokemonData} counter={props.counter} addMethod={(pokemon) => addPoke(pokemon)} />
+          <PokemonGrid state={pokemonData} party={props.state} counter={props.counter} addMethod={(pokemon) => addPoke(pokemon)} />
         </div>
         <div className="pokegrid--col--party">
           { <PartyColumn props={props.state} />  }
