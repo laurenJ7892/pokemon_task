@@ -39,10 +39,7 @@ const Main = () => {
   useEffect(() => { getParty(); }, []);
   useEffect(() => { getPartyCounter(); }, {});
   
-  // get inital load - to test
   getGenOneAllPokies();
-  //getParty();
-  //getPartyCounter();
 
   return (
     <Switch>

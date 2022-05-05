@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue, increment, } from "firebase/database";
+import { getDatabase, ref, set, onValue, increment, update } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -79,5 +79,11 @@ export const addPokeToParty = async ({ name, id, sprites, types }) => {
 export const removePokeFromPaty = async ({ id, name }) => {
   await set(ref(db, 'pokeParty/' + id), null);
   updateCounter(name, 'remove');
+  return true;
+}
+
+export const savePokemonName = async (id, newName) => {
+  console.log(id, newName);
+  await update(ref(db, 'pokeParty/' + id), {name: newName});
   return true;
 }

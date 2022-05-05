@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import PokemonSquare from '../components/PokemonSquare';
-import { removePokemon } from '../logic/party'
+import { removePokemon } from '../logic/party';
+import { savePokemonName } from '../../firebase/firebase';
 
 const Party = (props) => {
-  
   const removePokeFromPaty = async (pokemon) => {
     await removePokemon(pokemon);
+    props.getParty();
+  }
+
+  const saveNewName = async (id, name) => {
+    await savePokemonName(id, name);
     props.getParty();
   }
 
@@ -24,7 +29,7 @@ const Party = (props) => {
         </div>
       </div>
       <div className="pokemon--grid">
-        {props.state.map((item) => <PokemonSquare data={item} page={'party'} count={filterCount(item.name)} removeMethod={(pokemon) => removePokeFromPaty(pokemon)} /> )}
+        {props.state.map((item) => <PokemonSquare data={item} page={'party'} count={filterCount(item.name)} removeMethod={(pokemon) => removePokeFromPaty(pokemon)} saveMethod={(id, name) => saveNewName(id, name)} /> )}
       </div>
       <p className="party_tally">{props.state.length}/6</p>
       <Link className="a" to="/">

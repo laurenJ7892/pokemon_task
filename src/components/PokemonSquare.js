@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +26,9 @@ const pokeTypeColours = {
 };
 
 const PokemonSquare = (props) => {
-  let pokeName = props.data.name;
+  // update name
+  const [pokeName, setName] = useState(props.data.name);
+  const [toggle, setToggle] = useState(false);
   let pokeId = props.data.id;
   let pokeShowId = `#${pokeId.toString().padStart(3, '0')}`;
   let imageUrl = props.data.sprites ? props.data.sprites.front_default : props.data.imageUrl ? props.data.imageUrl : pokeBall;
@@ -38,9 +40,9 @@ const PokemonSquare = (props) => {
   // check if party counter was in party page
 
   return (
-        <div className="pokeCard" key={pokeId} onClick={ props.page == 'pokedex' ? () => props.addMethod(props.data) : () => props.removeMethod(props.data)}>
+        <div className="pokeCard" key={pokeId} >
         { pokeName != '' ? <p className="pokeCard--pokeNumber--text">{pokeShowId}</p> : <p></p> }
-        <img className="pokeCard--image" src={imageUrl}/>
+        <img className="pokeCard--image" src={imageUrl} onClick={ props.page == 'pokedex' ? () => props.addMethod(props.data) : () => props.removeMethod(props.data)}/>
         { pokeName != '' ?
           <p className="pokeCard--added-party">Added to {partyCounter} parties</p> :  <FontAwesomeIcon className="plusImage" icon={faPlus}  size="2x" />
         }
@@ -58,7 +60,22 @@ const PokemonSquare = (props) => {
         { pokeName != '' ? <div className="pokeCard--pokeNumber"></div> : '' }
         <div className="pokeCard--intersect--rectangle"></div>
         <div className="pokeCard--intersect--circle"></div>
-        <header className="pokeCard--name">{pokeName}</header>
+        { props.page== 'party' && toggle ? <input className="pokeCard--name" type="text" defaultValue={pokeName}
+          onChange={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setName(e.target.value);
+            props.saveMethod(props.data.id, e.target.value);
+          }} 
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              setToggle(false);
+              event.preventDefault();
+              event.stopPropagation();
+            }
+        }}/>  
+          : 
+         <header className="pokeCard--name" onClick={() => setToggle(true)}>{pokeName}</header> }
         { partyPokemon && partyPokemon.length > 1 && partyPokemon.includes(pokeId) ?
           <div className="pokeCard--union--rectangle" style={{borderColor: '#96DED1'}}></div>
           : <div className="pokeCard--union--rectangle"></div>

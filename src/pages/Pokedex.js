@@ -53,8 +53,8 @@ const Pokedex = (props) => {
 
   return (
     <div className="content-container">
+      <div>
         <ToastContainer  position="top-right" autoClose={5000} closeOnClick/>
-        <p className="pokegrid_tally">{pokemonData.length}/151</p>
         <Link to="/party">
         <div className="circle">
           <p className="circle--text">Party</p>
@@ -76,6 +76,8 @@ const Pokedex = (props) => {
         <div className="pokegrid--col--party">
           { <PartyColumn props={props.state} />  }
         </div>
+      </div>
+      <p className="pokegrid_tally">{pokemonData.length}/151</p>
       </div>
   );
 }

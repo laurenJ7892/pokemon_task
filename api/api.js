@@ -10,6 +10,14 @@ const getRequest = async (url) => {
   }
 }
 
+const patchRequest = async (url, data) => {
+  const config = {
+    'Content-Type':'application/json',
+
+  }
+  const res = await axios.push(url, data, config);
+}
+
 
 export const getGenOneAllPokies = async () => {
   if (genOneArray.length == 0) { 
