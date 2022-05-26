@@ -13,7 +13,6 @@ const getRequest = async (url) => {
 const patchRequest = async (url, data) => {
   const config = {
     'Content-Type':'application/json',
-
   }
   const res = await axios.push(url, data, config);
 }
@@ -24,7 +23,6 @@ export const getGenOneAllPokies = async () => {
     const res = await getRequest(genOnePokeUrl);
     if (res && res.pokemon_species) {   
       genOneArray.push(Object.values(res.pokemon_species).map(pokemon => pokemon.name));
-      // write to firebase storage?
     }
     else {
     // to do error handling

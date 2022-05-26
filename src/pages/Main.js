@@ -14,8 +14,7 @@ const Main = () => {
   const getParty = async () => {
     let partyData = await getPartyData();
     let arrayLength = partyData.length;
-    // to test
-    if (partySize > arrayLength ) {
+    if (partySize > arrayLength && arrayLength > 0 ) {
       [...Array(partySize - arrayLength)].map((item, index) => {
         partyData.push({
           name: '',
@@ -24,7 +23,7 @@ const Main = () => {
           types: []
         });
       });
-    } else {
+    } else if (arrayLength > 0) {
       partyData = checkPartySize(partyData);
     }
     setParty(partyData);
@@ -35,7 +34,7 @@ const Main = () => {
     let counter = await getPartiesCounter();
     setPartyCounter(counter);
   }
-  // listen for changes
+
   useEffect(() => { getParty(); }, []);
   useEffect(() => { getPartyCounter(); }, {});
   

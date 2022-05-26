@@ -572,6 +572,7 @@ img.logo--image {
 
 /* Media Queries */
 
+/* Mobile */
 @media all and (max-width: 550px) {
   body {
     margin: 0;
@@ -597,7 +598,7 @@ img.logo--image {
     background-image: url('../images/pikachu.png');
     background-repeat: no-repeat;
     height: 732px;
-    width: 811px;
+    width: 150%;
     position: absolute;
     top: 80px;
     left: -316px;
@@ -902,7 +903,40 @@ img.logo--image {
   .left-column--scroll-more {
     visibility: hidden;
   }
+}
 
-}  
+/* Tablet */
+  @media all and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+    .pokegrid--col--party {
+      width: 95%;
+      left: 57rem;
+    }
+
+    .left-column--page--header {
+      width: 50px;
+      left: 30px;
+    }
+
+    .pokeCard {
+      left: 30%;
+    }
+
+    .pokecol-images {
+      left: 0;
+    }
+
+    .left-column--scroll-more--text {
+      left: 85px;
+    }
+
+    .pokemon--grid {
+      left: 0;
+    }
+
+    .background-image--container {
+      left: 0;
+    }
+}
 
 /* Media Queries */

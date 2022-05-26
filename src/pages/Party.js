@@ -31,6 +31,7 @@ const Party = (props) => {
       <div className="pokemon--grid">
         {props.state.map((item) => <PokemonSquare data={item} page={'party'} count={filterCount(item.name)} removeMethod={(pokemon) => removePokeFromPaty(pokemon)} saveMethod={(id, name) => saveNewName(id, name)} /> )}
       </div>
+      {/* Fix count */}
       <p className="party_tally">{props.state.length}/6</p>
       <Link className="a" to="/">
         <div className="circle">

@@ -9,19 +9,16 @@ export const getPartyData = async () => {
 
 export const removePokemon = async (pokemon) => {
   const done = await removePokeFromPaty(pokemon);
-  // send back to trigger getPaty Load
   return done;
 }
 
 export const checkPartySize = (party) => {
   const data = party.filter(item => item.name != '');
-  console.log(data);
   return data;
 }
 
 export const addPokemon = async (pokemon) => {
   const done = await addPokeToParty(pokemon);
-  // send back to trigger getPaty Load
   return done;
 }
 

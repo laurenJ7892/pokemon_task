@@ -83,7 +83,6 @@ export const removePokeFromPaty = async ({ id, name }) => {
 }
 
 export const savePokemonName = async (id, newName) => {
-  console.log(id, newName);
   await update(ref(db, 'pokeParty/' + id), {name: newName});
   return true;
 }

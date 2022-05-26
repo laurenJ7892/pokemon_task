@@ -11,7 +11,7 @@ module.exports = {
 	output: {
     path: path.join(__dirname,'public'),
     filename: 'bundle.js',
-    //clean: true
+    publicPath: '/'
   },
   module: {
     rules: [{
@@ -33,9 +33,9 @@ module.exports = {
   ],
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, 'public')
-
     }
   }
 };

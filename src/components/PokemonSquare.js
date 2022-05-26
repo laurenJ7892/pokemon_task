@@ -26,9 +26,9 @@ const pokeTypeColours = {
 };
 
 const PokemonSquare = (props) => {
-  // update name
   const [pokeName, setName] = useState(props.data.name);
   const [toggle, setToggle] = useState(false);
+  
   let pokeId = props.data.id;
   let pokeShowId = `#${pokeId.toString().padStart(3, '0')}`;
   let imageUrl = props.data.sprites ? props.data.sprites.front_default : props.data.imageUrl ? props.data.imageUrl : pokeBall;
