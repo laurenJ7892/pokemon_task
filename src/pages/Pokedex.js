@@ -39,7 +39,6 @@ const Pokedex = (props) => {
       await addPokemon(pokemon);
       props.getParty();
     } else {
-      // to test
       toast("You already have 6 pokemon, please remove before adding more!");
     }
   }

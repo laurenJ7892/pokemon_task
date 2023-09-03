@@ -7,6 +7,7 @@ import { removePokemon } from '../logic/party';
 import { savePokemonName } from '../../firebase/firebase';
 
 const Party = (props) => {
+  console.log(props)
   const removePokeFromPaty = async (pokemon) => {
     await removePokemon(pokemon);
     props.getParty();
@@ -29,7 +30,15 @@ const Party = (props) => {
         </div>
       </div>
       <div className="pokemon--grid">
-        {props.state.map((item) => <PokemonSquare data={item} page={'party'} count={filterCount(item.name)} removeMethod={(pokemon) => removePokeFromPaty(pokemon)} saveMethod={(id, name) => saveNewName(id, name)} /> )}
+        {props.state.map((item) => 
+            <PokemonSquare 
+              data={item} 
+              page={'party'} 
+              count={filterCount(item.name)} 
+              removeMethod={(pokemon) => removePokeFromPaty(pokemon)}
+              saveMethod={(id, name) => saveNewName(id, name)} 
+            /> 
+        )}
       </div>
       {/* Fix count */}
       <p className="party_tally">{props.state.length}/6</p>

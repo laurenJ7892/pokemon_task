@@ -57,7 +57,10 @@ export const getPartyCounter = () => {
 }
 
 const updateCounter = (pokemon, direction) => {
-  const val = direction == 'add' ? 1 : -1;
+  let val = direction == 'add' ? 1 : -1;
+  if (val < 0) {
+    val = 0;
+  }
   set(ref(db, 'pokePartyCount/' + pokemon), {
     count: increment(val)
   })

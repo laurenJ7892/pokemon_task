@@ -28,23 +28,23 @@ const pokeTypeColours = {
 const PokemonSquare = (props) => {
   const [pokeName, setName] = useState(props.data.name);
   const [toggle, setToggle] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   
   let pokeId = props.data.id;
   let pokeShowId = `#${pokeId.toString().padStart(3, '0')}`;
   let imageUrl = props.data.sprites ? props.data.sprites.front_default : props.data.imageUrl ? props.data.imageUrl : pokeBall;
   let types = props.data.types;
   let typeArray = types && types.map((i) => [i.type.name]);
-  let partyCounter = props.count;
-  let partyPokemon = props.party;
-
-  // check if party counter was in party page
-
+  
+  
   return (
-        <div className="pokeCard" key={pokeId} >
+        <div className="pokeCard" key={pokeId} onClick={() => setIsSelected(!isSelected)} >
         { pokeName != '' ? <p className="pokeCard--pokeNumber--text">{pokeShowId}</p> : <p></p> }
-        <img className="pokeCard--image" src={imageUrl} onClick={ props.page == 'pokedex' ? () => props.addMethod(props.data) : () => props.removeMethod(props.data)}/>
+        <img className="pokeCard--image" 
+          src={imageUrl}
+          onClick={ props.page == 'pokedex' ? () => props.addMethod(props.data) : () => props.removeMethod(props.data)}/>
         { pokeName != '' ?
-          <p className="pokeCard--added-party">Added to {partyCounter} parties</p> :  <FontAwesomeIcon className="plusImage" icon={faPlus}  size="2x" />
+          <p className="pokeCard--added-party">Added to {props.count} parties</p> :  <FontAwesomeIcon className="plusImage" icon={faPlus}  size="2x" />
         }
         {  typeArray && typeArray.length == 1 ?
           (
@@ -76,9 +76,10 @@ const PokemonSquare = (props) => {
         }}/>  
           : 
          <header className="pokeCard--name" onClick={() => setToggle(true)}>{pokeName}</header> }
-        { partyPokemon && partyPokemon.length > 1 && partyPokemon.includes(pokeId) ?
-          <div className="pokeCard--union--rectangle" style={{borderColor: '#96DED1'}}></div>
-          : <div className="pokeCard--union--rectangle"></div>
+        { props.count > 0 ? 
+        isSelected ? <div className="pokeCard--union--rectangle-selected-active" ></div> :
+        <div className="pokeCard--union--rectangle-selected" ></div>
+        : <div className="pokeCard--union--rectangle" ></div>
         }
         <div className="pokeCard--card-body"></div>
       </div>

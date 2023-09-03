@@ -11,6 +11,7 @@ const Main = () => {
   const [party, setParty] = useState([]);
   const [partiesCounter, setPartyCounter] = useState({});
 
+  
   const getParty = async () => {
     let partyData = await getPartyData();
     let arrayLength = partyData.length;
