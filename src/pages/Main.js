@@ -6,9 +6,15 @@ import { getGenOneAllPokies } from '../../api/api';
 import { getPartyData, getPartiesCounter, partySize, checkPartySize } from '../logic/party';
 import pokeBall from '../../images/pokeball.png';
 
+const partyArray = [...Array(partySize)].map((item, index) => ({
+  id: index + 1,
+  name: '',
+  imageUrl: '',
+  types: [],
+}));
 
 const Main = () => {
-  const [party, setParty] = useState([]);
+  const [party, setParty] = useState(partyArray);
   const [partiesCounter, setPartyCounter] = useState({});
 
   
@@ -24,10 +30,11 @@ const Main = () => {
           types: []
         });
       });
+      setParty(partyData);
     } else if (arrayLength > 0) {
       partyData = checkPartySize(partyData);
+      setParty(partyData);
     }
-    setParty(partyData);
     getPartyCounter();
   }
 

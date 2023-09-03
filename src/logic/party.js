@@ -3,26 +3,21 @@ import { addPokeToParty, removePokeFromPaty, getParty, getPartyCounter } from '.
 export const partySize = 6;
 
 export const getPartyData = async () => {
-    let partyData = await getParty();
-    return partyData
+    return await getParty();
 };
 
 export const removePokemon = async (pokemon) => {
-  const done = await removePokeFromPaty(pokemon);
-  return done;
+  return await removePokeFromPaty(pokemon);
 }
 
 export const checkPartySize = (party) => {
-  const data = party.filter(item => item.name != '');
-  return data;
+  return party.filter(item => item.name != '');
 }
 
 export const addPokemon = async (pokemon) => {
-  const done = await addPokeToParty(pokemon);
-  return done;
+  return await addPokeToParty(pokemon);
 }
 
 export const getPartiesCounter = async () => {
-  const done = await getPartyCounter();
-  return done;
+  return await getPartyCounter();
 }

@@ -29,12 +29,12 @@ const PokemonSquare = (props) => {
   const [pokeName, setName] = useState(props.data.name);
   const [toggle, setToggle] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-  
-  let pokeId = props.data.id;
-  let pokeShowId = `#${pokeId.toString().padStart(3, '0')}`;
-  let imageUrl = props.data.sprites ? props.data.sprites.front_default : props.data.imageUrl ? props.data.imageUrl : pokeBall;
-  let types = props.data.types;
-  let typeArray = types && types.map((i) => [i.type.name]);
+
+  const pokeId = props.data.id;
+  const pokeShowId = `#${pokeId.toString().padStart(3, '0')}`;
+  const imageUrl = props.data.sprites ? props.data.sprites.front_default : props.data.imageUrl ? props.data.imageUrl : pokeBall;
+  const types = props.data.types;
+  const typeArray = types && types.map((i) => [i.type.name]);
   
   
   return (
@@ -57,10 +57,10 @@ const PokemonSquare = (props) => {
             ))
             )}
           </div> }
-        { pokeName != '' ? <div className="pokeCard--pokeNumber"></div> : '' }
+        {/* { pokeName != '' ? <div className="pokeCard--pokeNumber"></div> : '' } */}
         <div className="pokeCard--intersect--rectangle"></div>
         <div className="pokeCard--intersect--circle"></div>
-        { props.page== 'party' && toggle ? <input className="pokeCard--name" type="text" defaultValue={pokeName}
+        { props.page == 'party' && toggle ? <input className="pokeCard--name" type="text" defaultValue={pokeName}
           onChange={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -78,7 +78,8 @@ const PokemonSquare = (props) => {
          <header className="pokeCard--name" onClick={() => setToggle(true)}>{pokeName}</header> }
         { props.count > 0 ? 
         isSelected ? <div className="pokeCard--union--rectangle-selected-active" ></div> :
-        <div className="pokeCard--union--rectangle-selected" ></div>
+        <div className="pokeCard--union--rectangle-selected" >
+        </div>
         : <div className="pokeCard--union--rectangle" ></div>
         }
         <div className="pokeCard--card-body"></div>

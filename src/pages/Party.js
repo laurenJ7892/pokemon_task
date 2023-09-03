@@ -7,7 +7,8 @@ import { removePokemon } from '../logic/party';
 import { savePokemonName } from '../../firebase/firebase';
 
 const Party = (props) => {
-  console.log(props)
+  const partyLength = props.state.filter(item => item.name);
+
   const removePokeFromPaty = async (pokemon) => {
     await removePokemon(pokemon);
     props.getParty();
@@ -38,10 +39,9 @@ const Party = (props) => {
               removeMethod={(pokemon) => removePokeFromPaty(pokemon)}
               saveMethod={(id, name) => saveNewName(id, name)} 
             /> 
-        )}
+          )}
       </div>
-      {/* Fix count */}
-      <p className="party_tally">{props.state.length}/6</p>
+      <p className="party_tally">{partyLength.length}/6</p>
       <Link className="a" to="/">
         <div className="circle">
           <p className="circle--text">Dex</p>
